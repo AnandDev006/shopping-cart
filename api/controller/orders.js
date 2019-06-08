@@ -6,12 +6,15 @@ module.exports = {
 	getOrders: async (req, res, next) => {
 		const userId = req.params.userId;
 		try {
-			const { ordersList, _id } = await Order.findOne({ userId }).select(
+			const existingOrder = await Order.findOne({ userId }).select(
 				'ordersList _id'
 			);
-			if (!ordersList) {
+
+			if (!existingOrder) {
 				return res.status(200).json({ count: 0, products: [] });
 			}
+
+			const { ordersList, _id } = existingOrder;
 
 			const response = {
 				_id,

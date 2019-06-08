@@ -1,19 +1,18 @@
 const express = require('express');
+const graphqlHTTP = require('express-graphql');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const { MONGO_PASSWORD } = require('./api/configurations');
+const { MONGO_URI } = require('./api/configurations');
 
 // Connect to mongoDB
-mongoose.connect(
-	`mongodb+srv://dev:${MONGO_PASSWORD}@auth-g04hn.mongodb.net/test?retryWrites=true`,
-	{ useNewUrlParser: true }
-);
+mongoose.connect(MONGO_URI, { useNewUrlParser: true });
 
 const authRoutes = require('./api/routes/users');
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+const schema = require('./api/schema');
 
 const app = express();
 
@@ -38,6 +37,7 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/graphql', graphqlHTTP({ schema, graphiql: true }));
 
 // Start server
 const port = process.env.PORT || 5000;

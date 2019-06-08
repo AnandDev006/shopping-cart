@@ -15,7 +15,7 @@ module.exports = {
 						_id: doc._id,
 						request: {
 							type: 'GET',
-							url: 'http://localhost:5000/products/' + doc._id,
+							url: 'http://localhost:5000/api/products/' + doc._id,
 						},
 					};
 				}),
@@ -43,7 +43,7 @@ module.exports = {
 					_id: result._id,
 					request: {
 						type: 'GET',
-						url: 'http://localhost:5000/products/' + result._id,
+						url: 'http://localhost:5000/api/products/' + result._id,
 					},
 				},
 			});
@@ -62,7 +62,7 @@ module.exports = {
 					product,
 					request: {
 						type: 'GET',
-						url: 'http://localhost:5000/products',
+						url: 'http://localhost:5000/api/products',
 					},
 				});
 			} else {
@@ -87,7 +87,7 @@ module.exports = {
 				message: 'Product updated',
 				request: {
 					type: 'GET',
-					url: 'http://localhost:5000/products/' + id,
+					url: 'http://localhost:5000/api/products/' + id,
 				},
 			});
 		} catch (error) {
@@ -104,7 +104,7 @@ module.exports = {
 				message: 'Product deleted',
 				request: {
 					type: 'POST',
-					url: 'http://localhost:5000/products',
+					url: 'http://localhost:5000/api/products',
 					body: { name: 'String', price: 'Number' },
 				},
 			});

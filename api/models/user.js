@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
-	_id: Schema.Types.ObjectId,
 	method: {
 		type: String,
 		enum: ['local', 'google', 'facebook'],
